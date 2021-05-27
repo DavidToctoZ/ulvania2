@@ -19,8 +19,17 @@ public class GameManager : MonoBehaviour
     SpriteRenderer srHero;
     CapsuleCollider2D colliderHero;
     Transform contactPoint;
+    [SerializeField]    
+    Transform groundCheckCollider;
+    [SerializeField]
+    LayerMask groundLayer;
+
     //private bool isRunning = false;
     private float movement;
+
+    bool isGrounded = false;
+
+    bool _canDoubleJump = false;
 
     private bool enemyInstantiated = false;
 
@@ -36,6 +45,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GroundCheck();
+        
         if (hero.transform.position.x > checkSpawnEnemy.position.x && !enemyInstantiated)
         {
             // Debemos spawnear un enemigo
@@ -83,9 +94,20 @@ public class GameManager : MonoBehaviour
             animmatorHero.SetBool("isJumping", false);
         }
 
-        if (!IsJumping() && Input.GetKey(KeyCode.Space))
+        if (isGrounded)
         {
+            _canDoubleJump = true;
+        }
+
+        Debug.Log(IsJumping());
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        {
+            
             Jump();
+        }else if (_canDoubleJump && Input.GetKeyDown(KeyCode.Space))
+        {
+                Jump();
+                _canDoubleJump = false;
         }
         
         if (rbHero.velocity.y < 0)
@@ -97,6 +119,19 @@ public class GameManager : MonoBehaviour
             rbHero.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1  ) * Time.deltaTime;
         }
     }
+
+
+    private void GroundCheck()
+    {
+        isGrounded = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckCollider.position,  0.2f, groundLayer);
+        if(colliders.Length > 0)
+        {
+            isGrounded = true;
+        }
+    
+    }
+
 
     private void Jump()
     {
