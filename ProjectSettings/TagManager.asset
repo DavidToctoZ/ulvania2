@@ -9,6 +9,7 @@ TagManager:
   - ground
   - Hero
   - boss
+  - spirit
   layers:
   - Default
   - TransparentFX

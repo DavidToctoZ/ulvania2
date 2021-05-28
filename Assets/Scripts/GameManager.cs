@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerCanMove)
         {
+            animmatorHero.SetTrigger("hurt");
             health -= damage;
             healthSlider.value -= damage;
         }
@@ -234,6 +235,11 @@ public class GameManager : MonoBehaviour
     {
         addDamage(3);
     }
+
+    public void damageMinionAttack()
+    {
+        addDamage(2);
+    }
     private void specialAttack()
     {
         if(power == powerActivate)
@@ -278,8 +284,6 @@ public class GameManager : MonoBehaviour
         mainCamera.transform.position = initialPositionCamera;
         vcam1.transform.position = initialPositionCameraV;
         hero.transform.rotation = resetRotation;
-
-
     }
     bool playerCanMove = true;
     void FreezeMotion()
