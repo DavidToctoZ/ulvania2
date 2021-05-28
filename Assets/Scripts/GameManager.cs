@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     LayerMask groundLayer;
 
+
+    private Animator animator;
+    public Slider slider;
+
+    int power = 10;
+    [SerializeField]
+    private int maxPower = 10;
+
     //private bool isRunning = false;
     private float movement;
 
@@ -33,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private bool enemyInstantiated = false;
 
+    bool hasSpecialPower = false;
+
     void Start()
     {
         rbHero = hero.GetComponent<Rigidbody2D>();
@@ -40,13 +51,26 @@ public class GameManager : MonoBehaviour
         srHero = hero.GetComponent<SpriteRenderer>();
         colliderHero = hero.GetComponent<CapsuleCollider2D>();
         contactPoint = hero.transform.Find("ContactPoint").transform;
+
+        specialAttack();
+
+        
+        slider.maxValue =maxPower;
+        slider.minValue = 0f;
+        slider.value = 0f;
+
     }
 
+    public void addPower(int damage)
+    {
+        power += damage;
+        slider.value += damage;
+    }
     // Update is called once per frame
     void Update()
     {
         GroundCheck();
-        
+        specialAttack();
         if (hero.transform.position.x > checkSpawnEnemy.position.x && !enemyInstantiated)
         {
             // Debemos spawnear un enemigo
@@ -99,7 +123,6 @@ public class GameManager : MonoBehaviour
             _canDoubleJump = true;
         }
 
-        Debug.Log(IsJumping());
         if (Input.GetKey(KeyCode.Space) && isGrounded)
         {
             
@@ -169,4 +192,29 @@ public class GameManager : MonoBehaviour
             Vector2.down * (colliderHero.bounds.extents.y + 0.2f),
             color);
     }
+
+
+    private void specialAttack()
+    {
+        if(power == 10)
+        {
+            hasSpecialPower = true;
+        }
+
+        else if (hasSpecialPower && Input.GetMouseButtonDown(1))
+        {
+            if (!srHero.flipX)
+            {
+                hero.transform.position = new Vector3(hero.transform.position.x + 10, hero.transform.position.y, 0f);
+
+            }
+            else
+            {
+                hero.transform.position = new Vector3(hero.transform.position.x - 10, hero.transform.position.y, 0f);
+            }
+            power = 0;
+            slider.value =0;
+        }
+    }
+
 }

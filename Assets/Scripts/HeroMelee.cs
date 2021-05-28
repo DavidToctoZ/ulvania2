@@ -8,6 +8,7 @@ public class HeroMelee : MonoBehaviour
 {
     private Animator animator;
     private GameObject contactPoint;
+    public GameManager gm;
 
     [SerializeField]
     private float attackRange = 2f;
@@ -44,6 +45,7 @@ public class HeroMelee : MonoBehaviour
         {
             if (collider.tag == "Enemy")
             {
+                gm.addPower(1);
                 collider.GetComponent<EnemyController>().Hurt(damage);
             }
         }
