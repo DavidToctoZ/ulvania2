@@ -27,9 +27,10 @@ public class GameManager : MonoBehaviour
 
 
     private Animator animator;
-    public Slider slider;
+    public Slider powerSlider;
+    public Slider healthSlider;
 
-    int power = 10;
+    int power = 1;
     [SerializeField]
     private int maxPower = 10;
 
@@ -44,6 +45,11 @@ public class GameManager : MonoBehaviour
 
     bool hasSpecialPower = false;
 
+    int health = 10;
+    [SerializeField]
+    private int maxHealth = 10;
+
+
     void Start()
     {
         rbHero = hero.GetComponent<Rigidbody2D>();
@@ -51,20 +57,26 @@ public class GameManager : MonoBehaviour
         srHero = hero.GetComponent<SpriteRenderer>();
         colliderHero = hero.GetComponent<CapsuleCollider2D>();
         contactPoint = hero.transform.Find("ContactPoint").transform;
+        powerSlider.maxValue =maxPower;
+        powerSlider.minValue = 0f;
+        powerSlider.value = 0f;
 
-        specialAttack();
-
-        
-        slider.maxValue =maxPower;
-        slider.minValue = 0f;
-        slider.value = 0f;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.minValue = 0f;
+        healthSlider.value = maxHealth;
 
     }
 
     public void addPower(int damage)
     {
         power += damage;
-        slider.value += damage;
+        powerSlider.value += damage;
+    }
+
+    public void addDamage(int damage)
+    {
+        health -= damage;
+        healthSlider.value -= health;
     }
     // Update is called once per frame
     void Update()
@@ -193,10 +205,10 @@ public class GameManager : MonoBehaviour
             color);
     }
 
-
+    int powerActivate = 2;
     private void specialAttack()
     {
-        if(power == 10)
+        if(power == powerActivate)
         {
             hasSpecialPower = true;
         }
@@ -213,7 +225,8 @@ public class GameManager : MonoBehaviour
                 hero.transform.position = new Vector3(hero.transform.position.x - 10, hero.transform.position.y, 0f);
             }
             power = 0;
-            slider.value =0;
+            powerSlider.value =0;
+            hasSpecialPower = false;
         }
     }
 
