@@ -1224,3 +1224,39 @@ Received Import Request.
   path: Assets/Gothicvania Cemetery Artwork/Sprites/unknown.png
   artifactKey: Guid(7ebe2a5a8d3e4ad41bfea8bef2f13835) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Gothicvania Cemetery Artwork/Sprites/unknown.png using Guid(7ebe2a5a8d3e4ad41bfea8bef2f13835) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5597e027798d05748bd16b414354c2ad') in 0.014328 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 441.366175 seconds.
+  path: Assets/Scripts/Hero
+  artifactKey: Guid(af497c7b75c33864681a2f32ce054cde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Hero using Guid(af497c7b75c33864681a2f32ce054cde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '431f586982eb19ba059b5b639feb268b') in 0.004406 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 279.517130 seconds.
+  path: Assets/Animations/Skeleton
+  artifactKey: Guid(8ac229de1c4bfd04f9c03b9d260d4570) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Skeleton using Guid(8ac229de1c4bfd04f9c03b9d260d4570) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb3c54963633884f16b1ab03d7f0fcd2') in 0.004712 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.478855 seconds.
+  path: Assets/Animations/Skeleton/Destroy.anim
+  artifactKey: Guid(b954659323f75b3488f013c04bb2ae47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animations/Skeleton/Destroy.anim using Guid(b954659323f75b3488f013c04bb2ae47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f955295532770a936635172936832ea7') in 0.003718 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.957451 seconds.
+  path: Assets/Gothicvania Cemetery Artwork/Sprites/skeleton/skeleton-1.png
+  artifactKey: Guid(3d7ea891e5aa9415e9bf6d2e52d3d0d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Gothicvania Cemetery Artwork/Sprites/skeleton/skeleton-1.png using Guid(3d7ea891e5aa9415e9bf6d2e52d3d0d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ba6ff3d2ec16c8583c815e426ab6f47') in 0.018715 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.565451 seconds.
+  path: Assets/Gothicvania Cemetery Artwork/Sprites/skeleton/skeleton-3.png
+  artifactKey: Guid(8c88c4f4340b14d1bb3506e2d2dc27cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Gothicvania Cemetery Artwork/Sprites/skeleton/skeleton-3.png using Guid(8c88c4f4340b14d1bb3506e2d2dc27cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd533fee02df036bd5e5dfef25bd3d8cb') in 0.021517 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.357142 seconds.
+  path: Assets/Gothicvania Cemetery Artwork/Sprites/skeleton/skeleton-5.png
+  artifactKey: Guid(2d54e9cca4323409ca3a67d12ae4bd25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Gothicvania Cemetery Artwork/Sprites/skeleton/skeleton-5.png using Guid(2d54e9cca4323409ca3a67d12ae4bd25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63050de935da968ea4a257b1e84c0890') in 0.014918 seconds 
