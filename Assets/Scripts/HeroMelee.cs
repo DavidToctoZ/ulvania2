@@ -47,6 +47,10 @@ public class HeroMelee : MonoBehaviour
             {
                 gm.addPower(1);
                 collider.GetComponent<EnemyController>().Hurt(damage);
+            }else if(collider.tag == "boss")
+            {
+                gm.addPower(1);
+                collider.GetComponent<BossController>().Hurt(1);
             }
         }
     }
@@ -59,4 +63,6 @@ public class HeroMelee : MonoBehaviour
         }
         Gizmos.DrawWireSphere(contactPoint.transform.position, attackRange);
     }
+
+    
 }

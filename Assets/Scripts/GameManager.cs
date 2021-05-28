@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     private Animator animator;
     public Slider powerSlider;
     public Slider healthSlider;
+    public GameObject mainCamera;
+    public GameObject vcam1;
 
     int power = 1;
     [SerializeField]
@@ -49,9 +51,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int maxHealth = 10;
 
+    Vector3 initialPositionHero;
 
+    Vector3 initialPositionCamera;
+
+    Vector3 initialPositionCameraV;
+    Quaternion resetRotation;
     void Start()
     {
+        
         rbHero = hero.GetComponent<Rigidbody2D>();
         animmatorHero = hero.GetComponent<Animator>();
         srHero = hero.GetComponent<SpriteRenderer>();
@@ -60,10 +68,16 @@ public class GameManager : MonoBehaviour
         powerSlider.maxValue =maxPower;
         powerSlider.minValue = 0f;
         powerSlider.value = 0f;
+        initialPositionHero = hero.transform.position;
 
         healthSlider.maxValue = maxHealth;
         healthSlider.minValue = 0f;
         healthSlider.value = maxHealth;
+
+        initialPositionCamera = mainCamera.transform.position;
+        initialPositionCameraV = vcam1.transform.position;
+
+        resetRotation = hero.transform.rotation;
 
     }
 
@@ -76,14 +90,21 @@ public class GameManager : MonoBehaviour
 
     public void addDamage(int damage)
     {
-        health -= damage;
-        healthSlider.value -= health;
+        if (playerCanMove)
+        {
+            health -= damage;
+            healthSlider.value -= damage;
+        }
+        
     }
     // Update is called once per frame
     void Update()
     {
+
+        deathFall();
         GroundCheck();
         specialAttack();
+        totalDead();
         if (hero.transform.position.x > checkSpawnEnemy.position.x && !enemyInstantiated)
         {
             // Debemos spawnear un enemigo
@@ -168,7 +189,7 @@ public class GameManager : MonoBehaviour
     
     }
 
-
+    
     private void Jump()
     {
         animmatorHero.SetBool("isJumping", true);
@@ -176,6 +197,7 @@ public class GameManager : MonoBehaviour
         rbHero.velocity = new Vector2(rbHero.velocity.x, heroJumpSpeed);
     }
 
+    
     private bool IsJumping()
     {
         RaycastHit2D hit = Physics2D.Raycast(
@@ -207,6 +229,11 @@ public class GameManager : MonoBehaviour
     }
 
     int powerActivate = 2;
+
+    public void damageHozAttack()
+    {
+        addDamage(3);
+    }
     private void specialAttack()
     {
         if(power == powerActivate)
@@ -225,10 +252,69 @@ public class GameManager : MonoBehaviour
             {
                 hero.transform.position = new Vector3(hero.transform.position.x - 10, hero.transform.position.y, 0f);
             }
-            power = 0;
+            power = 1;
             powerSlider.value =0;
             hasSpecialPower = false;
         }
     }
+    public void deathFall()
+    {
+        if(hero.transform.position.y <= -8)
+        {
+            addDamage(10);
+        }
+
+       
+    }
+    IEnumerator waitDeath()
+    {
+        FreezeMotion();
+        animmatorHero.SetTrigger("death");
+        hero.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(1.4f);
+        hero.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        UnFreezeMotion();
+        hero.transform.position = initialPositionHero;
+        mainCamera.transform.position = initialPositionCamera;
+        vcam1.transform.position = initialPositionCameraV;
+        hero.transform.rotation = resetRotation;
+
+
+    }
+    bool playerCanMove = true;
+    void FreezeMotion()
+    {
+        playerCanMove = false;
+        hero.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+
+
+    }
+
+    void UnFreezeMotion()
+    {
+        playerCanMove = true;
+        hero.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        hero.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+    public void totalDead()
+    {
+        if (playerCanMove)
+        {
+            if (health <= 0)
+            {
+                health = maxHealth;
+                healthSlider.value = maxHealth;
+                StartCoroutine("waitDeath");
+
+            }
+        }
+        
+    }
+
+    public void killPlayer()
+    {
+        addDamage(10);
+    }
+
 
 }

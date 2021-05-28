@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ContactPoint
   - Enemy
+  - ground
+  - Hero
+  - boss
   layers:
   - Default
   - TransparentFX
@@ -48,4 +51,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 3349584949
+    locked: 0
+  - name: Boos
+    uniqueID: 2936641145
     locked: 0

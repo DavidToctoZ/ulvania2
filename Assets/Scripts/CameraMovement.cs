@@ -21,13 +21,9 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.x < startFollowPoint.position.x)
-        {
-            bgMovement.UnFollow();
-            vcam1CVC.Follow = null;
-        }else {
-            bgMovement.Follow();
-            vcam1CVC.Follow = transform;
-        }
+        
+        bgMovement.Follow();
+        vcam1CVC.Follow = transform;
+        
     }
 }
