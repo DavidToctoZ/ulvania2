@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     {
         power += damage;
         powerSlider.value += damage;
+        //a
     }
 
     public void addDamage(int damage)
